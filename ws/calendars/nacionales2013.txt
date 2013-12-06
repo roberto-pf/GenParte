@@ -1,0 +1,42 @@
+{ "item": [
+    {
+        "strType": "nacional",
+        "strDate": "2013-01-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-01-07"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-03-28"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-03-29"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-05-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-08-15"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-10-12"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-11-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-12-06"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-12-25"
+    }
+]}

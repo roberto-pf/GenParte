@@ -1,0 +1,30 @@
+Aplicación web generadora de partes de horas mensuales en formato *.xls
+
+
+DEMO:	http://genparte.disastercode.com.es
+
+
+Directorios del repositorio:
+	web: contiene la aplicación web.
+	ws: contiene un servicio web a través del cuál se pueden obtener los días festivos.
+
+
+Tecnologías empleadas:
+	- Plugin Fullcalendar de Jquery para implementar el calendario.
+			http://arshaw.com/fullcalendar/
+
+
+	- Nusoap, como servidor web para los días festivos.
+			http://sourceforge.net/projects/nusoap/
+
+
+	- PHPExcel, como librería para generar la hoja de excel.
+			http://phpexcel.codeplex.com/
+
+
+	- Diseño formularios: Formly -> 
+				http://thrivingkings.com/read/Formly-The-form-glamorizer-for-jQuery
+			      NiceForms -> 
+				http://www.emblematiq.com/lab/niceforms/
+	
+

@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Generador de partes de trabajo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<script src='lib/jquery.min.js'></script>
+	<script src='lib/jquery-ui-1.10.3.custom.js'></script>
+	<script src="lib/ui/jquery.ui.button.js"></script>
+	<script src="lib/ui/jquery.ui.dialog.js"></script>
+	
+	<link rel="stylesheet" href="css/themes/base/jquery.ui.all.css">
+	
+	<link href='lib/fullcalendar/fullcalendar.css' rel='stylesheet' />
+	<link href='lib/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<script src='lib/fullcalendar/fullcalendar.min.js'></script>
+	
+	<script language="javascript" type="text/javascript" src="lib/niceforms.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="css/NiceForms/niceforms-default.css" />
+			
+	<script language="javascript" type="text/javascript" src="lib/formly.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="css/formly.css" />
+	
+	<script src='lib/utils.js'></script>
+	
+
+<style>
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+		
+	#loading {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		}
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+
+</style>
+</head>
+<body>
+<div id='loading' style='display:none'>loading...</div>
+
+<div id="container">
+	<form action="generate.php" method="post" class="niceform" id="mainForm">
+		<input type="hidden" name="events" id="events" value=""/>
+		<input type="hidden" name="period" id="period" value=""/>
+		<fieldset>
+			<legend>Datos Principales</legend>
+			<dl>
+				<dt><label for="name">Nombre y Apellidos:</label></dt>
+				<dd><input type="text" name="name" id="name" size="32" maxlength="75" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="telephone">Tel&eacute;fono:</label></dt>
+				<dd><input type="text" name="telephone" id="telephone" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl class="salt">
+				<dt><label for="numOrder">N&uacute;mero de Pedido:</label></dt>
+				<dd><input type="text" name="numOrder" id="numOrder" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="sat">SAT:</label></dt>
+				<dd><input type="text" name="sat" id="sat" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl class="salt">
+				<dt><label for="at">AT:</label></dt>
+				<dd><input type="text" name="at" id="at" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="numOrderSale">N&uacute;mero de Venta:</label></dt>
+				<dd><input type="text" name="numOrderSale" id="numOrderSale" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl class="salt">
+				<dt><label for="numSale">N&uacute;mero de Oferta:</label></dt>
+				<dd><input type="text" name="numSale" id="numSale" size="32" maxlength="25" /></dd>
+			</dl>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Horas/Mes</legend>
+			
+			<select name="calendarFestive" id="calendarFestive" onchange="ejectFestive();">
+				<option value="">Seleccione</option>
+				<option value="nacionales2013">Pintar Festivos Nacionales 2013</option>
+				<option value="santander2013">Pintar Festivos Santander 2013</option>
+			</select>
+			
+			<br/>
+			<div id='calendar'></div>
+			<br/>
+			
+			<div style="postion:reative;margin-left:700px;">
+			<div style="background-color: #FFFFFF; border-color: #FFFFFF; color: #000000; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title"><strong>Leyenda</strong></span>
+				</div>
+			</div>
+			<br/>
+			<div style="background-color: #6495ED; border-color: #6495ED; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">N&ordm; HORAS/DIA</span>
+				</div>
+			</div>
+			<div style="background-color: #D2691E; border-color: #D2691E; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">N&ordm; DE HORAS EXTRAS</span>
+				</div>
+			</div>
+			<div style="background-color: #8B008B; border-color: #8B008B; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">N&ordm; DE GUARDIAS</span>
+				</div>
+			</div>
+			<div style="background-color: #2F4F4F; border-color: #2F4F4F; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">INCIDENCIAS EN GUARDIA</span>
+				</div>
+			</div>
+			<div style="background-color: #006400; border-color: #006400; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">INTERVENCIONES</span>
+				</div>
+			</div>
+			<div style="background-color: #DC143C; border-color: #DC143C; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">DIAS DE VACACIONES</span>
+				</div>
+			</div>
+			<div style="background-color: #FF1493; border-color: #FF1493; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">DIAS DE ENFERMEDAD</span>
+				</div>
+			</div>
+			<div style="background-color: #00FF00; border-color: #00FF00; color: #FFFFFF; width: 200px; -moz-user-select: none;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable" unselectable="on">
+				<div class="fc-event-inner">
+					<span class="fc-event-title">OTROS</span>
+				</div>
+			</div>
+			<br/>
+			<div style="background-color: #F08080; border-color: #F08080; color: #000000; width: 200px;" 
+					class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable">
+				<div class="fc-event-inner">
+					<span class="fc-event-title"><strong>Festivos</strong></span>
+				</div>
+			</div>
+			
+			</div>
+		</fieldset>
+		
+		 <fieldset>
+			<legend>Datos Adicionales</legend>
+			<dl>
+				<dt><label for="comments">Comentarios:</label></dt>
+				<dd><textarea name="comments" id="comments" rows="5" cols="60"></textarea></dd>
+			</dl>
+		</fieldset>
+				
+		 <fieldset>
+			<legend>Generar Parte</legend>
+			<dl>
+				<dt><label for="modelPart">Modelo Parte:</label></dt>
+				<dd><input type="text" name="modelPart" id="modelPart" size="32" maxlength="25" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="generateXLS"></label></dt>
+				<dd><input type="button" name="generateXLS" id="generateXLS" value="Generar"/></dd>
+			</dl>
+		</fieldset>
+		
+	</form>
+</div>	
+	
+<script>
+	$( "#generateXLS" ).click(function() {
+		var eventsFromCalendar = $('#calendar').fullCalendar('clientEvents');
+	
+		var eventsForCookie = [];
+
+		$.each(eventsFromCalendar, function(index,value) {
+			var event = new Object();
+			event.id = value.id;            
+			event.start = $.datepicker.formatDate('yy-mm-dd', value.start);
+			event.end = $.datepicker.formatDate('yy-mm-dd', value.end);
+			event.title = value.title;
+			//event.allDay = value.allDay;
+			event.activity = value.activity;
+			eventsForCookie.push(event);
+		});  
+		$(":hidden#events").val(JSON.stringify(eventsForCookie));	
+		$(":hidden#period").val( $("h2").text() );
+		$("#mainForm").submit();
+	});
+	
+</script>	
+		
+
+
+<div id="dialog" title="Basic dialog">
+	<form id="principalsDats" width="420px" >
+		<input type="hidden" name="startDate" id="startDate" value=""/>
+		<input type="hidden" name="endDate" id="endDate" value=""/>
+		<input type="hidden" name="allDay" id="allDay" value=""/>
+					
+		<label for="activity">Actividad:</label>
+		<select name="activity" id="activity">
+			<option value="1">N&ordm; HORAS/DIA</option>
+			<option value="2">N&ordm; de HORAS EXTRAS</option>
+			<option value="3">N&ordm; de GUARDIAS</option>
+			<option value="4">INCIDENCIAS EN GUARDIA</option>
+			<option value="5">INTERVENCIONES</option>
+			<option value="6">DIAS DE VACACIONES</option>
+			<option value="7">DIAS DE ENFERMEDAD</option>
+			<option value="8">OTROS</option>
+		</select>
+		
+		
+		<input type="text" name="quantity" id="quantity" place="Cantidad" size="25" maxlength="3"/> 
+		
+		
+		<input type="button" name="add" onclick="addEvent();" value="A&ntilde;adir"/>
+	</form>
+</div>
+</body>
+</html>

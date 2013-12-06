@@ -1,0 +1,58 @@
+{ "item": [
+    {
+        "strType": "nacional",
+        "strDate": "2013-01-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-01-07"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-03-28"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-03-29"
+    },
+    {
+        "strType": "autonomico",
+        "strDate": "2013-04-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-05-01"
+    },
+    {
+        "strType": "local",
+        "strDate": "2013-05-20"
+    },
+    {
+        "strType": "autonomico",
+        "strDate": "2013-07-25"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-08-15"
+    },
+    {
+        "strType": "local",
+        "strDate": "2013-08-30"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-10-12"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-11-01"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-12-06"
+    },
+    {
+        "strType": "nacional",
+        "strDate": "2013-12-25"
+    }
+]}
