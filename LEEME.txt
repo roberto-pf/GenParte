@@ -7,6 +7,7 @@ DEMO:	http://genparte.disastercode.com.es
 Directorios del repositorio:
 	web: contiene la aplicación web.
 	ws: contiene un servicio web a través del cuál se pueden obtener los días festivos.
+	template: excel resultante.
 
 
 Tecnologías empleadas:

@@ -7,6 +7,7 @@ DEMO:	http://genparte.disastercode.com.es
 Repository directories:
 	web: contains the web application.
 	ws: contains a web service through which you can get holidays.
+	template: excel result.
 
 
 Technologies used:
